@@ -60,7 +60,7 @@ with st.form("channel_form"):
     telegram_post_link = st.text_input("لینک یک پست از کانال که دارای گزینه خرید است", placeholder="مثال: https://t.me/channelname/123")
     is_private_channel = st.checkbox("کانال خصوصی است؟")
     bot_username = st.text_input("یوزرنیم ربات کانال", placeholder="مثال: ChannelBot")
-    balance_message_number = st.number_input("محتوای موجودی چندمین پیام ربات کانال است؟", min_value=1, value=1, step=1)
+    balance_message_number = st.number_input("محتوای موجودی چندمین پیام ربات کانال است؟", min_value=2, value=2, step=1)
     telegram_channel_link = telegram_channel_link.replace('@', '')
 
     # دکمه ارسال فرم
