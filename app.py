@@ -59,8 +59,10 @@ with st.form("channel_form"):
     telegram_channel_link = st.text_input("لینک کانال تلگرامی", placeholder="مثال: @channelname")
     telegram_post_link = st.text_input("لینک یک پست از کانال که دارای گزینه خرید است", placeholder="مثال: https://t.me/channelname/123")
     is_private_channel = st.checkbox("کانال خصوصی است؟")
-    bot_username = st.text_input("یوزرنیم ربات کانال", placeholder="مثال: ChannelBot")
+    bot_username = st.text_input("یوزرنیم ربات کانال", placeholder="مثال: Hamkari_bot")
     balance_message_number = st.number_input("محتوای موجودی چندمین پیام ربات کانال است؟", min_value=2, value=2, step=1)
+    vendor_tlg_id = st.text_input("آی‌دی تلگرام شما", placeholder="مثال: my_telegram_id@")
+
     telegram_channel_link = telegram_channel_link.replace('@', '')
 
     # دکمه ارسال فرم
@@ -108,23 +110,20 @@ if submit_button:
                 "channel_post": telegram_post_link,
                 "is_private": is_private_channel,
                 "bot_username": bot_username,
-                "inventory_message_number": int(balance_message_number)
+                "inventory_message_number": int(balance_message_number),
+                "vendor_tlg_id": vendor_tlg_id
             }
 
-            # ارسال درخواست به API
             success, result = call_api(payload)
 
-            # نمایش نتیجه به کاربر
             if success and result.get("status", False):
                 st.success(f"عملیات موفقیت‌آمیز بود: {result.get('message', '')}")
             else:
                 st.error(f"عملیات ناموفق بود: {result.get('message', 'خطای نامشخص')}")
 
-            # نمایش جزئیات بیشتر پاسخ (اختیاری)
             with st.expander("جزئیات پاسخ"):
                 st.json(result)
 
-# افزودن راهنمایی در پایین صفحه
 st.markdown("""
 ---
 ### راهنما:
